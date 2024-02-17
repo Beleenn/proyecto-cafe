@@ -7,8 +7,8 @@ from datetime import datetime
  
 # ----------------------- CLASS NEGOCIO ----------------------------
 
-class Negocio ():
-    emprendimiento_nombre= 'Entorno Cafe'
+class Negocio():
+    db_Productos= 'Productos.db'
     def __init__(self, ventana_venta):
         menu_negocio= Menu(ventana_venta)
         ventana_venta.title("Entorno Cafe")
@@ -74,15 +74,13 @@ class Negocio ():
 
 #---------------------------------------Informacion------------------------------------
         self.Label_informacion =LabelFrame(ventana_venta)
-
 #-------------------------------Pantalla de Incio--------------------------------------
         self.widgets_crud()
-#WIDGETS
     def widgets_crud(self):
          #-------------Logo negocio------------------------------------
         self.frame_logo_productos.config(bd=2)
         self.frame_logo_productos.grid(row=0,column=0,padx=5,pady=5)
-		    #-------------------LOGO---------------------------------------------
+
         imagen=Image.open("granos cafe icono.png")
         nueva_imagen=imagen.resize((320,150))
         render=ImageTk.PhotoImage(nueva_imagen)
@@ -637,7 +635,7 @@ class Negocio ():
 
 #--------------------- OTRAS FUNCIONES PRODUCTOS-------------------------------
     def Ejecutar_consulta(self, query, parameters=()):
-        with sqlite3.connect(self.emprendimiento_nombre) as conexion:
+        with sqlite3.connect(self.db_Productos) as conexion:
             cursor=conexion.cursor()
             result=cursor.execute(query,parameters)
             conexion.commit()
@@ -911,7 +909,7 @@ class Negocio ():
              messagebox.showerror("ERROR", "Complete todos los campos para la busqueda") 
 
 if __name__ == '__main__':
-    ventana_producto=Tk()
-    label_crud=Label(ventana_producto)
-    application= Negocio (ventana_producto)
-    ventana_producto.mainloop()
+    ventana_venta=Tk()
+    label_crud=Label(ventana_venta)
+    application=Negocio (ventana_venta)
+    ventana_venta.mainloop()
